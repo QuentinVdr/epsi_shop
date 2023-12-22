@@ -1,6 +1,9 @@
 import 'package:epsi_shop/bo/article.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '../bo/cart.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -30,10 +33,14 @@ class HomePage extends StatelessWidget {
               'E-Commerce',
             ),
             Spacer(),
-            IconButton(
-              icon: const Icon(Icons.shopping_cart),
-              tooltip: 'Grid view',
-              onPressed: () => context.goNamed('cart'),
+            Badge(
+              offset: Offset(-5, 5),
+              label: Text(
+                  "${context.watch<Cart>().listArticles.length > 99 ? '+99' : context.watch<Cart>().listArticles.length}"),
+              child: IconButton(
+                icon: const Icon(Icons.shopping_cart),
+                onPressed: () => context.goNamed('cart'),
+              ),
             ),
           ]),
           backgroundColor: Colors.lightBlue,
@@ -53,7 +60,9 @@ class HomePage extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       trailing: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<Cart>().add(listArticle[index]);
+                        },
                         child: Text('Ajouter'),
                       )),
                 );
