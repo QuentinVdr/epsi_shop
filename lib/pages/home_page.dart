@@ -1,5 +1,6 @@
 import 'package:epsi_shop/bo/article.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -32,7 +33,7 @@ class HomePage extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.grid_view),
               tooltip: 'Grid view',
-              onPressed: () {},
+              onPressed: () => context.goNamed('cart'),
             ),
           ]),
           backgroundColor: Colors.lightBlue,
