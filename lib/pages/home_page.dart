@@ -29,7 +29,11 @@ class HomePage extends StatelessWidget {
               'E-Commerce',
             ),
             Spacer(),
-            Icon(Icons.grid_view)
+            IconButton(
+              icon: const Icon(Icons.grid_view),
+              tooltip: 'Grid view',
+              onPressed: () {},
+            ),
           ]),
           backgroundColor: Colors.lightBlue,
         ),
