@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
             ),
             Spacer(),
             IconButton(
-              icon: const Icon(Icons.grid_view),
+              icon: const Icon(Icons.shopping_cart),
               tooltip: 'Grid view',
               onPressed: () => context.goNamed('cart'),
             ),
