@@ -52,9 +52,13 @@ class HomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Card(
                   child: ListTile(
+                      onTap: () {
+                        context.goNamed('detail', extra: listArticle[index]);
+                      },
                       leading:
                           Image.network(listArticle[index].image, width: 60),
-                      title: Text(listArticle[index].nom),
+                      title: Text(listArticle[index].nom,
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
                       subtitle: Text(
                         listArticle[index].getPrixEnEuros(),
                         style: TextStyle(fontWeight: FontWeight.bold),

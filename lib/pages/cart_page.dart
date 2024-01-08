@@ -71,7 +71,7 @@ class ListCart extends StatelessWidget {
             Text('Votre panier total est de'),
             Spacer(),
             Text(
-              '${cart.getTotalEnEuros()}',
+              cart.getTotalEnEuros(),
               style: const TextStyle(fontWeight: FontWeight.bold),
             )
           ]),
