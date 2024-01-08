@@ -73,7 +73,7 @@ class ListCart extends StatelessWidget {
             Text('Votre panier total est de'),
             Spacer(),
             Text(
-              '${listArticles.fold(0, (previousValue, element) => previousValue + element.prix).toStringAsFixed(2)}€',
+              '${(listArticles.fold(0, (previousValue, element) => previousValue + element.prix) / 100).toStringAsFixed(2)}€',
               style: const TextStyle(fontWeight: FontWeight.bold),
             )
           ]),
