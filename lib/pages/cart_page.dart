@@ -21,9 +21,7 @@ class CartPage extends StatelessWidget {
       ),
       body: Consumer<Cart>(
         builder: (BuildContext context, Cart cart, Widget? child) {
-          return cart.listArticles.isEmpty
-              ? const EmptyCart()
-              : ListCart(cart.listArticles);
+          return cart.listArticles.isEmpty ? const EmptyCart() : ListCart(cart);
         },
       ),
     );
@@ -60,9 +58,9 @@ class EmptyCart extends StatelessWidget {
 }
 
 class ListCart extends StatelessWidget {
-  const ListCart(this.listArticles, {super.key});
+  const ListCart(this.cart, {super.key});
 
-  final List<Article> listArticles;
+  final Cart cart;
 
   @override
   Widget build(BuildContext context) {
@@ -73,22 +71,23 @@ class ListCart extends StatelessWidget {
             Text('Votre panier total est de'),
             Spacer(),
             Text(
-              '${(listArticles.fold(0, (previousValue, element) => previousValue + element.prix) / 100).toStringAsFixed(2)}€',
+              '${cart.getTotalEnEuros()}',
               style: const TextStyle(fontWeight: FontWeight.bold),
             )
           ]),
           SizedBox(height: 10),
           Expanded(
               child: ListView.builder(
-                  itemCount: listArticles.length,
+                  itemCount: cart.listArticles.length,
                   itemBuilder: (context, index) {
                     return Card(
                         child: ListTile(
-                            leading: Image.network(listArticles[index].image,
+                            leading: Image.network(
+                                cart.listArticles[index].image,
                                 width: 60),
-                            title: Text(listArticles[index].nom),
+                            title: Text(cart.listArticles[index].nom),
                             subtitle: Text(
-                              listArticles[index].getPrixEnEuros(),
+                              cart.listArticles[index].getPrixEnEuros(),
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold),
                             ),
@@ -96,7 +95,7 @@ class ListCart extends StatelessWidget {
                               icon: const Icon(Icons.delete),
                               onPressed: () => context
                                   .read<Cart>()
-                                  .remove(listArticles[index]),
+                                  .remove(cart.listArticles[index]),
                             )));
                   })),
           SizedBox(height: 10),

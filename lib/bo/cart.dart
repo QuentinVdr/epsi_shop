@@ -23,4 +23,16 @@ class Cart with ChangeNotifier {
     _listArticles.clear();
     notifyListeners();
   }
+
+  double getTotal() {
+    double total = 0;
+    for (Article article in _listArticles) {
+      total += article.prix;
+    }
+    return total;
+  }
+
+  String getTotalEnEuros() {
+    return (getTotal() / 100).toStringAsFixed(2) + '€';
+  }
 }
