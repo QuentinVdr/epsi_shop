@@ -5,7 +5,7 @@ import '../bo/article.dart';
 import '../bo/cart.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage(this.article, {super.key});
+  const DetailPage({super.key, required this.article});
 
   final Article article;
 

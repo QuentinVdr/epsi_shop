@@ -40,14 +40,10 @@ final GoRouter _router = GoRouter(
           },
         ),
         GoRoute(
-          path: 'detail',
-          name: 'detail',
-          builder: (BuildContext context, GoRouterState state) {
-            return DetailPage(
-              state.extra as Article,
-            );
-          },
-        ),
+            path: 'detail',
+            name: 'detail',
+            builder: (BuildContext context, GoRouterState state) =>
+                DetailPage(article: state.extra as Article))
       ],
     ),
   ],
