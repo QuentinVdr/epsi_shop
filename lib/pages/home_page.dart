@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
             Badge(
               offset: Offset(-5, 5),
               label: Text(
-                  "${context.read<Cart>().listArticles.length > 99 ? '+99' : context.read<Cart>().listArticles.length}"),
+                  "${context.watch<Cart>().listArticles.length > 99 ? '+99' : context.watch<Cart>().listArticles.length}"),
               child: IconButton(
                 icon: const Icon(Icons.shopping_cart),
                 onPressed: () => context.goNamed('cart'),
