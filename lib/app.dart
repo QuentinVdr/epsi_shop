@@ -1,4 +1,5 @@
 import 'package:epsi_shop/bo/article.dart';
+import 'package:epsi_shop/pages/about_us_page.dart';
 import 'package:epsi_shop/pages/cart_page.dart';
 import 'package:epsi_shop/pages/detail_page.dart';
 import 'package:epsi_shop/pages/home_page.dart';
@@ -35,15 +36,18 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: 'cart',
           name: 'cart',
-          builder: (BuildContext context, GoRouterState state) {
-            return CartPage();
-          },
+          builder: (BuildContext context, GoRouterState state) => CartPage(),
         ),
         GoRoute(
             path: 'detail',
             name: 'detail',
             builder: (BuildContext context, GoRouterState state) =>
-                DetailPage(article: state.extra as Article))
+                DetailPage(article: state.extra as Article)),
+        GoRoute(
+          path: 'aboutus',
+          name: 'aboutus',
+          builder: (BuildContext context, GoRouterState state) => AboutUsPage(),
+        ),
       ],
     ),
   ],

@@ -29,6 +29,9 @@ class HomePage extends StatelessWidget {
                 onPressed: () => context.goNamed('cart'),
               ),
             ),
+            IconButton(
+                onPressed: () => context.goNamed('aboutus'),
+                icon: const Icon(Icons.info_outline_rounded))
           ]),
           backgroundColor: Colors.lightBlue,
         ),
