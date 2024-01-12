@@ -64,14 +64,20 @@ class _PaymentPageState extends State<PaymentPage> {
                       style: TextStyle(fontSize: 10))),
               ElevatedButton(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    post(Uri.parse(postUrl),
-                        body: jsonEncode(<String, String>{
-                          'total':
-                              context.read<Cart>().getTotalTVA().toString(),
-                          'address': '16 Bd Général de Gaulle, 44200 Nantes',
-                          'paymentMethod': selectedPaymentMethod
-                        }));
+                    if (selectedPaymentMethod.isNotEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      post(Uri.parse(postUrl),
+                          body: jsonEncode(<String, String>{
+                            'total':
+                                context.read<Cart>().getTotalTVA().toString(),
+                            'address': '16 Bd Général de Gaulle, 44200 Nantes',
+                            'paymentMethod': selectedPaymentMethod
+                          }));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Veuillez choisir un moyen de paiement"),
+                      ));
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                       primary: Theme.of(context).colorScheme.primary,
