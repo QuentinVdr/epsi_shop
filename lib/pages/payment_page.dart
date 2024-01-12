@@ -17,7 +17,7 @@ class PaymentPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Finalisation de la commande'),
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Center(
         child: Padding(
@@ -36,7 +36,9 @@ class PaymentPage extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
-              PaymentMethode(),
+              PaymentMethode(
+                selectedPaymentMethod: "",
+              ),
               Spacer(),
               const Align(
                   alignment: Alignment.centerLeft,
@@ -47,7 +49,7 @@ class PaymentPage extends StatelessWidget {
                   onPressed: () =>
                       {ScaffoldMessenger.of(context).showSnackBar(snackBar)},
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.lightBlue,
+                      primary: Theme.of(context).colorScheme.primary,
                       onPrimary: Colors.white,
                       elevation: 5),
                   child: const Row(
@@ -179,68 +181,183 @@ class AdresseCard extends StatelessWidget {
   }
 }
 
-class PaymentMethode extends StatelessWidget {
-  const PaymentMethode({super.key});
+class PaymentMethode extends StatefulWidget {
+  final String selectedPaymentMethod;
+
+  PaymentMethode({required this.selectedPaymentMethod});
+
+  @override
+  _PaymentMethodeState createState() => _PaymentMethodeState();
+}
+
+class _PaymentMethodeState extends State<PaymentMethode> {
+  String selectedPaymentMethod = "";
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Card(
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              side: BorderSide(color: Theme.of(context).colorScheme.outline),
-            ),
-            child: const IconButton(
-              onPressed: {},
-              icon: FaIcon(
-                FontAwesomeIcons.ccApplePay,
-                size: 48,
-              ),
-            )),
-        Card(
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              side: BorderSide(color: Theme.of(context).colorScheme.outline),
-            ),
-            child: const IconButton(
-              onPressed: {},
-              icon: FaIcon(
-                FontAwesomeIcons.ccVisa,
-                size: 48,
-              ),
-            )),
-        Card(
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              side: BorderSide(color: Theme.of(context).colorScheme.outline),
-            ),
-            child: const IconButton(
-              onPressed: {},
-              icon: FaIcon(
-                FontAwesomeIcons.ccMastercard,
-                size: 48,
-              ),
-            )),
-        Card(
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              side: BorderSide(color: Theme.of(context).colorScheme.outline),
-            ),
-            child: const Padding(
-                padding: EdgeInsets.all(16.0),
+        selectedPaymentMethod == "ApplePay"
+            ? Badge(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                offset: const Offset(0, 0),
+                label: const Icon(
+                  Icons.check,
+                  size: 10,
+                ),
+                child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: BorderSide(
+                          color: Theme.of(context).colorScheme.outline),
+                    ),
+                    child: IconButton(
+                      onPressed: () =>
+                          setState(() => selectedPaymentMethod = "ApplePay"),
+                      icon: FaIcon(
+                        FontAwesomeIcons.ccApplePay,
+                        size: 52,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    )),
+              )
+            : Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side:
+                      BorderSide(color: Theme.of(context).colorScheme.outline),
+                ),
                 child: IconButton(
-                  onPressed: {},
-                  icon: FaIcon(
-                    FontAwesomeIcons.ccPaypal,
-                    size: 48,
+                  onPressed: () =>
+                      setState(() => selectedPaymentMethod = "ApplePay"),
+                  icon: const FaIcon(
+                    FontAwesomeIcons.ccApplePay,
+                    size: 52,
                   ),
-                ))),
+                )),
+        selectedPaymentMethod == "Visa"
+            ? Badge(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                offset: const Offset(0, 0),
+                label: const Icon(
+                  Icons.check,
+                  size: 10,
+                ),
+                child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: BorderSide(
+                          color: Theme.of(context).colorScheme.outline),
+                    ),
+                    child: IconButton(
+                      onPressed: () =>
+                          setState(() => selectedPaymentMethod = "Visa"),
+                      icon: FaIcon(
+                        FontAwesomeIcons.ccVisa,
+                        size: 52,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    )),
+              )
+            : Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side:
+                      BorderSide(color: Theme.of(context).colorScheme.outline),
+                ),
+                child: IconButton(
+                  onPressed: () =>
+                      setState(() => selectedPaymentMethod = "Visa"),
+                  icon: const FaIcon(
+                    FontAwesomeIcons.ccVisa,
+                    size: 52,
+                  ),
+                )),
+        selectedPaymentMethod == "MasterCard"
+            ? Badge(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                offset: const Offset(0, 0),
+                label: const Icon(
+                  Icons.check,
+                  size: 10,
+                ),
+                child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: BorderSide(
+                          color: Theme.of(context).colorScheme.outline),
+                    ),
+                    child: IconButton(
+                      onPressed: () =>
+                          setState(() => selectedPaymentMethod = "MasterCard"),
+                      icon: FaIcon(
+                        FontAwesomeIcons.ccMastercard,
+                        size: 52,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    )),
+              )
+            : Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side:
+                      BorderSide(color: Theme.of(context).colorScheme.outline),
+                ),
+                child: IconButton(
+                  onPressed: () =>
+                      setState(() => selectedPaymentMethod = "MasterCard"),
+                  icon: const FaIcon(
+                    FontAwesomeIcons.ccMastercard,
+                    size: 52,
+                  ),
+                )),
+        selectedPaymentMethod == "PayPal"
+            ? Badge(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                offset: const Offset(0, 0),
+                label: const Icon(
+                  Icons.check,
+                  size: 10,
+                ),
+                child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: BorderSide(
+                          color: Theme.of(context).colorScheme.outline),
+                    ),
+                    child: IconButton(
+                      onPressed: () =>
+                          setState(() => selectedPaymentMethod = "PayPal"),
+                      icon: FaIcon(
+                        FontAwesomeIcons.ccPaypal,
+                        size: 52,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    )),
+              )
+            : Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side:
+                      BorderSide(color: Theme.of(context).colorScheme.outline),
+                ),
+                child: IconButton(
+                  onPressed: () =>
+                      setState(() => selectedPaymentMethod = "PayPal"),
+                  icon: const FaIcon(
+                    FontAwesomeIcons.ccPaypal,
+                    size: 52,
+                  ),
+                )),
       ],
     );
   }
