@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../bo/article.dart';
@@ -14,7 +15,7 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Panier Flutter Save',
         ),
         backgroundColor: Colors.lightBlue,
@@ -68,7 +69,7 @@ class ListCart extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(children: [
           Row(children: [
-            Text('Votre panier total est de'),
+            const Text('Votre panier total est de'),
             Spacer(),
             Text(
               cart.getTotalEnEuros(),
@@ -99,9 +100,21 @@ class ListCart extends StatelessWidget {
                             )));
                   })),
           SizedBox(height: 10),
-          ElevatedButton(
-              onPressed: () => context.read<Cart>().removeAll(),
-              child: const Text('Vider le panier'))
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                  onPressed: () => context.read<Cart>().removeAll(),
+                  child: const Text('Vider le panier')),
+              ElevatedButton(
+                  onPressed: () => context.goNamed('payment'),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.lightBlue,
+                      onPrimary: Colors.white,
+                      elevation: 5),
+                  child: const Text('Procéder au paiement')),
+            ],
+          )
         ]));
   }
 }

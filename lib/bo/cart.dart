@@ -33,6 +33,14 @@ class Cart with ChangeNotifier {
   }
 
   String getTotalEnEuros() {
-    return (getTotal() / 100).toStringAsFixed(2) + '€';
+    return '${(getTotal() / 100).toStringAsFixed(2)}€';
+  }
+
+  String getTVAEnEuros() {
+    return '${(getTotal() * 0.2 / 100).toStringAsFixed(2)}€';
+  }
+
+  String getTotalTVAEnEuros() {
+    return '${(getTotal() * 1.2 / 100).toStringAsFixed(2)}€';
   }
 }

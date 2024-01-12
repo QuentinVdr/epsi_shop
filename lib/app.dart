@@ -3,6 +3,7 @@ import 'package:epsi_shop/pages/about_us_page.dart';
 import 'package:epsi_shop/pages/cart_page.dart';
 import 'package:epsi_shop/pages/detail_page.dart';
 import 'package:epsi_shop/pages/home_page.dart';
+import 'package:epsi_shop/pages/payment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -37,6 +38,14 @@ final GoRouter _router = GoRouter(
           path: 'cart',
           name: 'cart',
           builder: (BuildContext context, GoRouterState state) => CartPage(),
+          routes: <RouteBase>[
+            GoRoute(
+              path: 'payment',
+              name: 'payment',
+              builder: (BuildContext context, GoRouterState state) =>
+                  PaymentPage(),
+            ),
+          ],
         ),
         GoRoute(
             path: 'detail',
