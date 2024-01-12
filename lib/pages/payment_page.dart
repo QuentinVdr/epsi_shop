@@ -4,10 +4,14 @@ import 'package:provider/provider.dart';
 import '../bo/cart.dart';
 
 class PaymentPage extends StatelessWidget {
-  PaymentPage({super.key});
+  const PaymentPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    const snackBar = SnackBar(
+      content: Text("Merci pour l'argent"),
+    );
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -35,7 +39,8 @@ class PaymentPage extends StatelessWidget {
                       "En cliquant Sur Confirmer vous acceptez les Conditions de vente de EPSI Shop International. Besoin daide ? Désolé on peut rien faire \n En poursuivant, acceptez les Conditions d'utilisation du fournisseur de paiement CotfeeDis.",
                       style: TextStyle(fontSize: 10))),
               ElevatedButton(
-                  onPressed: () => {},
+                  onPressed: () =>
+                      {ScaffoldMessenger.of(context).showSnackBar(snackBar)},
                   style: ElevatedButton.styleFrom(
                       primary: Colors.lightBlue,
                       onPrimary: Colors.white,
