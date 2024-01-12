@@ -1,5 +1,6 @@
 # epsi_shop
 
+Repository of Quentin VERDIER
 My first Flutter project.
 
 ## Getting Started
