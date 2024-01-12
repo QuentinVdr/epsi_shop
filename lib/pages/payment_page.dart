@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../bo/cart.dart';
@@ -32,6 +33,10 @@ class PaymentPage extends StatelessWidget {
                 height: 16,
               ),
               const AdresseCard(),
+              const SizedBox(
+                height: 16,
+              ),
+              PaymentMethode(),
               Spacer(),
               const Align(
                   alignment: Alignment.centerLeft,
@@ -171,5 +176,72 @@ class AdresseCard extends StatelessWidget {
         ),
       ),
     ]);
+  }
+}
+
+class PaymentMethode extends StatelessWidget {
+  const PaymentMethode({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(color: Theme.of(context).colorScheme.outline),
+            ),
+            child: const IconButton(
+              onPressed: {},
+              icon: FaIcon(
+                FontAwesomeIcons.ccApplePay,
+                size: 48,
+              ),
+            )),
+        Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(color: Theme.of(context).colorScheme.outline),
+            ),
+            child: const IconButton(
+              onPressed: {},
+              icon: FaIcon(
+                FontAwesomeIcons.ccVisa,
+                size: 48,
+              ),
+            )),
+        Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(color: Theme.of(context).colorScheme.outline),
+            ),
+            child: const IconButton(
+              onPressed: {},
+              icon: FaIcon(
+                FontAwesomeIcons.ccMastercard,
+                size: 48,
+              ),
+            )),
+        Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(color: Theme.of(context).colorScheme.outline),
+            ),
+            child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: IconButton(
+                  onPressed: {},
+                  icon: FaIcon(
+                    FontAwesomeIcons.ccPaypal,
+                    size: 48,
+                  ),
+                ))),
+      ],
+    );
   }
 }
