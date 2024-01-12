@@ -29,6 +29,11 @@ class PaymentPage extends StatelessWidget {
               ),
               const AdresseCard(),
               Spacer(),
+              const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                      "En cliquant Sur Confirmer vous acceptez les Conditions de vente de EPSI Shop International. Besoin daide ? Désolé on peut rien faire \n En poursuivant, acceptez les Conditions d'utilisation du fournisseur de paiement CotfeeDis.",
+                      style: TextStyle(fontSize: 10))),
               ElevatedButton(
                   onPressed: () => {},
                   style: ElevatedButton.styleFrom(
@@ -38,7 +43,7 @@ class PaymentPage extends StatelessWidget {
                   child: const Row(
                     children: [
                       Spacer(),
-                      Text('Procéder au paiement'),
+                      Text("Confirmer l'achat"),
                       Spacer(),
                     ],
                   )),
