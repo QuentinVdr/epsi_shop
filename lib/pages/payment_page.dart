@@ -25,10 +25,6 @@ class _PaymentPageState extends State<PaymentPage> {
 
   @override
   Widget build(BuildContext context) {
-    const snackBar = SnackBar(
-      content: Text("Merci pour l'argent"),
-    );
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -62,10 +58,24 @@ class _PaymentPageState extends State<PaymentPage> {
                   child: Text(
                       "En cliquant Sur Confirmer vous acceptez les Conditions de vente de EPSI Shop International. Besoin daide ? Désolé on peut rien faire \n En poursuivant, acceptez les Conditions d'utilisation du fournisseur de paiement CotfeeDis.",
                       style: TextStyle(fontSize: 10))),
+              Text(selectedPaymentMethod),
               ElevatedButton(
                   onPressed: () {
-                    if (selectedPaymentMethod.isNotEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Merci pour l'argent"),
+                    ));
+                    post(Uri.parse(postUrl),
+                        body: jsonEncode(<String, String>{
+                          'total':
+                              context.read<Cart>().getTotalTVA().toString(),
+                          'address': '16 Bd Général de Gaulle, 44200 Nantes',
+                          'paymentMethod': selectedPaymentMethod
+                        }));
+                    // Mon rollback functionne pas :(
+                    /*if (selectedPaymentMethod != "") {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Merci pour l'argent"),
+                      ));
                       post(Uri.parse(postUrl),
                           body: jsonEncode(<String, String>{
                             'total':
@@ -77,7 +87,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Veuillez choisir un moyen de paiement"),
                       ));
-                    }
+                    }*/
                   },
                   style: ElevatedButton.styleFrom(
                       primary: Theme.of(context).colorScheme.primary,
