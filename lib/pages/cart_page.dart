@@ -18,7 +18,7 @@ class CartPage extends StatelessWidget {
         title: const Text(
           'Panier Flutter Save',
         ),
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Consumer<Cart>(
         builder: (BuildContext context, Cart cart, Widget? child) {
@@ -109,7 +109,7 @@ class ListCart extends StatelessWidget {
               ElevatedButton(
                   onPressed: () => context.goNamed('payment'),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.lightBlue,
+                      primary: Theme.of(context).colorScheme.primary,
                       onPrimary: Colors.white,
                       elevation: 5),
                   child: const Text('Procéder au paiement')),

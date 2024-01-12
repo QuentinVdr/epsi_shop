@@ -17,7 +17,7 @@ class DetailPage extends StatelessWidget {
           title: Text(
             'Detail ${article.nom}',
           ),
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: Theme.of(context).colorScheme.primary,
         ),
         body: Center(
           child: Padding(
