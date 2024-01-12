@@ -40,7 +40,11 @@ class Cart with ChangeNotifier {
     return '${(getTotal() * 0.2 / 100).toStringAsFixed(2)}€';
   }
 
+  double getTotalTVA() {
+    return getTotal() * 1.2;
+  }
+
   String getTotalTVAEnEuros() {
-    return '${(getTotal() * 1.2 / 100).toStringAsFixed(2)}€';
+    return '${(getTotalTVA() / 100).toStringAsFixed(2)}€';
   }
 }

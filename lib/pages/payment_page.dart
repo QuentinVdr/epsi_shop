@@ -1,11 +1,27 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 import '../bo/cart.dart';
 
-class PaymentPage extends StatelessWidget {
-  const PaymentPage({super.key});
+class PaymentPage extends StatefulWidget {
+  PaymentPage({super.key});
+
+  @override
+  State<PaymentPage> createState() => _PaymentPageState();
+}
+
+class _PaymentPageState extends State<PaymentPage> {
+  String selectedPaymentMethod = "";
+
+  String postUrl = "http://ptsv3.com/t/EPSISHOPC2/";
+
+  void updatePaymentMethod(String paymentMethod) {
+    selectedPaymentMethod = paymentMethod;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +48,13 @@ class PaymentPage extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
-              const AdresseCard(),
+              const AddressCard(),
               const SizedBox(
                 height: 16,
               ),
               PaymentMethode(
                 selectedPaymentMethod: "",
+                callBackPaymentMethod: updatePaymentMethod,
               ),
               Spacer(),
               const Align(
@@ -46,8 +63,16 @@ class PaymentPage extends StatelessWidget {
                       "En cliquant Sur Confirmer vous acceptez les Conditions de vente de EPSI Shop International. Besoin daide ? Désolé on peut rien faire \n En poursuivant, acceptez les Conditions d'utilisation du fournisseur de paiement CotfeeDis.",
                       style: TextStyle(fontSize: 10))),
               ElevatedButton(
-                  onPressed: () =>
-                      {ScaffoldMessenger.of(context).showSnackBar(snackBar)},
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    post(Uri.parse(postUrl),
+                        body: jsonEncode(<String, String>{
+                          'total':
+                              context.read<Cart>().getTotalTVA().toString(),
+                          'address': '16 Bd Général de Gaulle, 44200 Nantes',
+                          'paymentMethod': selectedPaymentMethod
+                        }));
+                  },
                   style: ElevatedButton.styleFrom(
                       primary: Theme.of(context).colorScheme.primary,
                       onPrimary: Colors.white,
@@ -134,8 +159,8 @@ class SummaryCart extends StatelessWidget {
   }
 }
 
-class AdresseCard extends StatelessWidget {
-  const AdresseCard({super.key});
+class AddressCard extends StatelessWidget {
+  const AddressCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -183,8 +208,12 @@ class AdresseCard extends StatelessWidget {
 
 class PaymentMethode extends StatefulWidget {
   final String selectedPaymentMethod;
+  final Function(String val) callBackPaymentMethod;
 
-  PaymentMethode({required this.selectedPaymentMethod});
+  const PaymentMethode(
+      {super.key,
+      required this.selectedPaymentMethod,
+      required this.callBackPaymentMethod});
 
   @override
   _PaymentMethodeState createState() => _PaymentMethodeState();
@@ -214,8 +243,10 @@ class _PaymentMethodeState extends State<PaymentMethode> {
                           color: Theme.of(context).colorScheme.outline),
                     ),
                     child: IconButton(
-                      onPressed: () =>
-                          setState(() => selectedPaymentMethod = "ApplePay"),
+                      onPressed: () {
+                        setState(() => selectedPaymentMethod = "ApplePay");
+                        widget.callBackPaymentMethod("ApplePay");
+                      },
                       icon: FaIcon(
                         FontAwesomeIcons.ccApplePay,
                         size: 52,
